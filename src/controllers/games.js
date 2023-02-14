@@ -14,7 +14,7 @@ async function readGames(req, res) {
         }
 
         const games = (await connection.query(
-            `SELECT games.*;`,
+            `SELECT games.*, games.name AS "gameName" FROM games WHERE games.name ILIKE ($1 || '%');`,
             [name]
         )).rows;
 
