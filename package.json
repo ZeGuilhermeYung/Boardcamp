@@ -2,27 +2,19 @@
   "name": "projeto16-boardcamp",
   "version": "1.0.0",
   "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "axios": "^0.27.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
     "joi": "^17.6.2",
     "pg": "^8.8.0"
-    },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/EduardoVSR1995/projeto15-boardcamp-back.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/EduardoVSR1995/projeto15-boardcamp-back/issues"
-  },
-  "homepage": "https://github.com/EduardoVSR1995/projeto15-boardcamp-back#readme",
-  "description": ""
+  }
 }
