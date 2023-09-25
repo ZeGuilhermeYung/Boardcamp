@@ -4,11 +4,11 @@ import { customerIdSearchValidation } from "../middlewares/customers.js";
 import { gameIdSearchValidation } from "../middlewares/games.js";
 import { rentalBodyValidation, rentalCustomerValidation, rentalGameValidation, rentalIdValidation, rentalNotReturnedValidation, rentalReturnedValidation, rentalsPossibilityValidation } from "../middlewares/rentals.js";
 
-const router = express.Router();
+const rentalsRouter = express.Router();
 
-router.post("/rentals", rentalBodyValidation, rentalCustomerValidation, rentalGameValidation, rentalsPossibilityValidation, createRental);
-router.get("/rentals", customerIdSearchValidation, gameIdSearchValidation, readRentals);
-router.post("/rentals/:id/return", rentalIdValidation, rentalNotReturnedValidation, updateRental);
-router.delete("/rentals/:id", rentalIdValidation, rentalReturnedValidation, deleteRental);
+rentalsRouter.post("/rentals", rentalBodyValidation, rentalCustomerValidation, rentalGameValidation, rentalsPossibilityValidation, createRental);
+rentalsRouter.get("/rentals", customerIdSearchValidation, gameIdSearchValidation, readRentals);
+rentalsRouter.post("/rentals/:id/return", rentalIdValidation, rentalNotReturnedValidation, updateRental);
+rentalsRouter.delete("/rentals/:id", rentalIdValidation, rentalReturnedValidation, deleteRental);
 
 export default rentalsRouter;
