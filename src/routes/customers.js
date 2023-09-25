@@ -5,7 +5,7 @@ import { customersSearchValidation, customerBodyValidation, uniqueCustomerValida
 const customersRouter = express.Router();
 
 customersRouter.get("/customers", customersSearchValidation, readCustomers);
-customersRouter.get("/customers/:id", customerIdValidation, readSingleCustomer);
+customersRouter.get("/customers/:id", customerBodyValidation, customerIdValidation, readSingleCustomer);
 customersRouter.post("/customers", customerBodyValidation, uniqueCustomerValidation, createCustomer);
 customersRouter.put("/customers/:id", customerBodyValidation, customerIdValidation, customerCPFValidation, updateCustomer);
 
