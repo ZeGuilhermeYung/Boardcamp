@@ -4,7 +4,7 @@ async function readCustomers(req, res) {
     const { cpf } = res.locals;
 
     try {
-        if (cpf === undefined) {
+        if (cpf) {
             const customers = (await connection.query("SELECT * FROM customers;")).rows;
 
             res.send(customers);
