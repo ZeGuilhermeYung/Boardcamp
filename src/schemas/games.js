@@ -19,6 +19,9 @@ const gamesSchema = joi.object({
         .integer()
         .min(1)
         .required(),
+    categoryId: joi.number()
+        .integer()
+        .required(),
     pricePerDay: joi.number()
         .integer()
         .min(1)

@@ -127,5 +127,5 @@ export {
     rentalsPossibilityValidation,
     rentalIdValidation,
     rentalNotReturnedValidation,
-    rentalReturnedValidation  
+    rentalReturnedValidation   
 }
