@@ -28,7 +28,6 @@ const customerSchema = joi.object({
         .required(),
     birthday: joi.date()
         .format('YYYY-MM-DD')
-        .raw()
         .required()
 });
 
