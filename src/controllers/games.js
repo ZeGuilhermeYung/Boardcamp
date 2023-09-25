@@ -4,9 +4,9 @@ async function readGames(req, res) {
     const { name } = res.locals;
 
     try {
-        if (name) {
+        if (name === undefined) {
             const games = (await connection.query(
-                `SELECT games.*, categories.name AS "categoryName" FROM games JOIN categories ON games."categoryId" = categories.id;`
+                'SELECT games.*, categories.name AS "categoryName" FROM games JOIN categories ON games;'
             )).rows;
 
             res.send(games);
@@ -14,19 +14,8 @@ async function readGames(req, res) {
         }
 
         const games = (await connection.query(
-            `SELECT
-              games.id,
-              games.name,
-              games.image,
-              games."stockTotal",
-              games."pricePerDay",
-              categories.id AS "categoryId",
-              categories.name AS "categoryName"
-            FROM
-              games
-              JOIN categories ON games."categoryId" = categories.id
-            WHERE
-              games.name ILIKE $1;`, [name]
+            `SELECT games.*, categories.name AS "categoryName" FROM games JOIN categories ON games;`,
+            [name]
         )).rows;
 
         res.send(games);
