@@ -4,29 +4,8 @@ async function readGames(req, res) {
     const { name } = res.locals;
 
     try {
-        if (name) {
-            const games = (await connection.query(
-                'SELECT games.*, categories.name AS "categoryName" FROM games JOIN categories ON games;'
-            )).rows;
-
-            res.send(games);
-            return;
-        }
-
         const games = (await connection.query(
-            `SELECT
-            games.id,
-            games.name,
-            games.image,
-            games."stockTotal",
-            games."pricePerDay",
-            categories.name AS "categoryName"
-          FROM
-            games
-            JOIN categories ON games
-          WHERE
-            games.name ILIKE $1;`,
-            [name]
+            "SELECT * FROM games;"
         )).rows;
 
         res.send(games);

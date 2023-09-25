@@ -4,14 +4,7 @@ async function readCustomers(req, res) {
     const { cpf } = res.locals;
 
     try {
-        if (cpf) {
-            const customers = (await connection.query("SELECT * FROM customers;")).rows;
-
-            res.send(customers);
-            return;
-        }
-
-        const customers = (await connection.query("SELECT * FROM customers WHERE LOWER(cpf) LIKE $1;", [cpf])).rows;
+        const customers = (await connection.query("SELECT * FROM customers;")).rows;
 
         res.send(customers);
     } catch (error) {
