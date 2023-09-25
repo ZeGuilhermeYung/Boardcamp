@@ -7,6 +7,10 @@
   "scripts": {
     "start": "node ./src/app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZeGuilhermeYung/Boardcamp.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
