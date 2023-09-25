@@ -2,7 +2,7 @@ import joi from "joi";
 
 const searchCustomerSchema = joi.object({
     cpf: joi.string()
-        .empty("")
+        .empty()
         .trim()
 });
 

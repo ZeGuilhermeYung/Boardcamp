@@ -21,7 +21,7 @@ async function readCustomers(req, res) {
 }
 
 async function readSingleCustomer(req, res) {
-    const { id } = res.locals;
+    const { id } = res.locals.body;
 
     try {
         const customerID = await connection.query(`SELECT * FROM customers WHERE id=$1 ;`, [id]);
