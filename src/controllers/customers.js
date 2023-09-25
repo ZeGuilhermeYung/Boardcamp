@@ -21,25 +21,9 @@ async function readCustomers(req, res) {
 }
 
 async function readSingleCustomer(req, res) {
-    const { customer, birthday } = res.locals;
+    const { customer } = res.locals;
 
-    try {
-        if (birthday) {
-            const customer = await connection.query(`
-      SELECT
-        *
-      FROM
-        customers
-      WHERE
-        id = $1`, [Number(id)]);
-
-        res.send(customer);
-        return;
-        }
-    } catch (error) {
-        console.log(error);
-        res.sendStatus(400);
-    }
+    res.send(customer);
 }
 
 async function createCustomer(req, res) {

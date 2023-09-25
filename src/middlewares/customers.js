@@ -64,6 +64,15 @@ async function uniqueCustomerValidation(req, res, next) {
 
 async function customerIdValidation(req, res, next) {
     const { id } = req.params;
+    const { birthday } = res.locals.body;
+
+    const validation = customerSchema.validate({ birthday }, { abortEarly: false });
+
+    if (validation.error) {
+        const errors = validation.error.details.map(error => error.message);
+        res.status(400).send({ message: errors });
+        return;
+    }
 
     try {
         const customer = (await connection.query("SELECT * FROM customers WHERE id = $1;", [id])).rows[0];
