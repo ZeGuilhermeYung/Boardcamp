@@ -8,6 +8,8 @@ const searchCustomerSchema = joi.object({
 
 const customerSchema = joi.object({
     name: joi.string()
+        .empty("")
+        .trim()
         .required(),
     phone: joi.string()
         .pattern(/[0-9]/)
@@ -16,8 +18,7 @@ const customerSchema = joi.object({
         .required(),
     cpf: joi.string()
         .pattern(/[0-9]/)
-        .min(11)
-        .max(11)
+        .length(11)
         .required(),
     birthday: joi.date()
         .required()
