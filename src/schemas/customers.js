@@ -1,4 +1,7 @@
 import joi from "joi";
+import joidate from '@joi/date';
+
+joi.extend(joidate);
 
 const joi = require('joi')
     .extend(require('@joi/date'));
