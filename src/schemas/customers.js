@@ -8,7 +8,7 @@ const searchCustomerSchema = joi.object({
 
 const customerSchema = joi.object({
     name: joi.string()
-        .empty("")
+        .empty()
         .trim()
         .required(),
     phone: joi.string()
