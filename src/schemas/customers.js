@@ -21,8 +21,7 @@ const customerSchema = joi.object({
         .length(11)
         .required(),
     birthday: joi.string()
-        .format(/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
-        .less("now")
+        .pattern(/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
         .required()
 });
 
