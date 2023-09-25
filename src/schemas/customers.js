@@ -21,7 +21,6 @@ const customerSchema = joi.object({
         .length(11)
         .required(),
     birthday: joi.date()
-        .pattern(/^\d{4}-\d{2}-\d{2}$/)
         .required()
 });
 
