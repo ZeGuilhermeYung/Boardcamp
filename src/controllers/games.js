@@ -6,7 +6,7 @@ async function readGames(req, res) {
     try {
         if (name === undefined) {
             const games = (await connection.query(
-                'SELECT games.*;'
+                'SELECT games.*, categories.name AS "categoryName" FROM games JOIN categories ON games."categoryId" = categories.id;'
             )).rows;
 
             res.send(games);
@@ -14,7 +14,7 @@ async function readGames(req, res) {
         }
 
         const games = (await connection.query(
-            `SELECT games.*, games.name AS "gameName" FROM games WHERE games.name ILIKE ($1 || '%');`,
+            `SELECT games.*, categories.name AS "categoryName" FROM games JOIN categories ON games."categoryId" = categories.id WHERE games.name ILIKE ($1 || '%');`,
             [name]
         )).rows;
 
