@@ -1,4 +1,4 @@
-import joi, { date } from "joi";
+import joi from "joi";
 
 const searchCustomerSchema = joi.object({
     cpf: joi.string()
@@ -20,8 +20,8 @@ const customerSchema = joi.object({
         .pattern(/^\d+$/)
         .length(11)
         .required(),
-    birthday: joi.date()
-        .format('YYYY-MM-DD')
+    birthday: joi.string()
+        .format(/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
         .less("now")
         .required()
 });

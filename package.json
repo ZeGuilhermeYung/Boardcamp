@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi-date": "^2.0.1",
     "@joi/date": "^2.1.0",
     "axios": "^1.5.0",
     "cors": "^2.8.5",
