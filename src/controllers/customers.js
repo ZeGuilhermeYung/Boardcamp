@@ -1,8 +1,6 @@
 import { connection } from "../database/database.js";
 
 async function readCustomers(req, res) {
-    const { cpf } = res.locals;
-
     try {
         const customers = (await connection.query("SELECT * FROM customers;")).rows;
 

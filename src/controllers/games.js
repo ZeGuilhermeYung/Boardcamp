@@ -1,8 +1,6 @@
 import { connection } from "../database/database.js";
 
 async function readGames(req, res) {
-    const { name } = res.locals;
-
     try {
         const games = (await connection.query(
             "SELECT * FROM games;"
