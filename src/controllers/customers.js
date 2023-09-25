@@ -11,7 +11,7 @@ async function readCustomers(req, res) {
             return;
         }
 
-        const customers = (await connection.query("SELECT * FROM customers WHERE cpf LIKE ($1 || '%');", [cpf])).rows;
+        const customers = (await connection.query("SELECT * FROM customers WHERE LOWER(cpf) LIKE $1;", [cpf])).rows;
 
         res.send(customers);
     } catch (error) {

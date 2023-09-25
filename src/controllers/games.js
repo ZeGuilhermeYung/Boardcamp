@@ -14,7 +14,7 @@ async function readGames(req, res) {
         }
 
         const games = (await connection.query(
-            `SELECT games.*, categories.name AS "categoryName" FROM games JOIN categories ON games."categoryId" = categories.id WHERE games.name ILIKE ($1 || '%');`,
+            `SELECT games.*, categories.name as "categoryName" FROM games JOIN categories ON games."categoryId" = categories.id WHERE LOWER(games.name) LIKE $1;`,
             [name]
         )).rows;
 
