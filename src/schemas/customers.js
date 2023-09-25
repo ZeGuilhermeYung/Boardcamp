@@ -1,7 +1,7 @@
-import joi from "joi";
-import joidate from '@joi/date';
+import joiBase from "joi";
+import joiDate from '@joi/date';
 
-joi.extend(joidate);
+const joi = joiBase.extend(joiDate);
 
 const searchCustomerSchema = joi.object({
     cpf: joi.string()
@@ -24,7 +24,8 @@ const customerSchema = joi.object({
         .length(11)
         .required(),
     birthday: joi.date()
-        .format('YYYY-MM-DD')
+        .format(['YYYY-MM-DD'])
+        .required()
 });
 
 export {
