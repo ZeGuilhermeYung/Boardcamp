@@ -22,11 +22,17 @@ async function customersSearchValidation(req, res, next) {
 async function customerBodyValidation(req, res, next) {
     const { name, phone, cpf, birthday } = req.body;
 
-    const validation = customerSchema.validate(req.body, { abortEarly: false });
+    const validation = customerSchema.validate({
+        name,
+        phone,
+        cpf,
+        birthday
+    }, { abortEarly: false });
 
     if (validation.error) {
-        const errors = validation.error.details.map((detail) => detail.message);
-        return res.status(400).send(errors);
+        const errors = validation.error.details.map(error => error.message);
+        res.status(400).send({ message: errors });
+        return;
     }
 
     res.locals.body = {
