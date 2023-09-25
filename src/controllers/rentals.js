@@ -1,4 +1,5 @@
 import { connection } from "../database/database.js";
+import dayjs from "dayjs";
 
 async function createRental(req, res) {
     const { customerId, gameId, daysRented } = res.locals.body;
@@ -35,7 +36,7 @@ async function readRentals(req, res) {
         }
 
         rentals.forEach(rent => {
-            rent.rentDate = rent.rentDate.toISOString().split('T')[0];
+            rent.rentDate = dayjs(rent.rentDate).format("YYYY-MM-DD");
         });
 
         res.send(rentals);
