@@ -1,4 +1,4 @@
-import { connection } from "../database/database.js";
+import database from "../database/database.js";
 import { categorySchema } from "../schemas/categories.js";
 
 async function nameCategoriesValidation (req, res, next) {
@@ -16,7 +16,7 @@ async function nameCategoriesValidation (req, res, next) {
     }
     
     try {
-        const repeatedName = (await connection.query("SELECT name FROM categories WHERE name = $1;", [name])).rows[0];
+        const repeatedName = (await database.query("SELECT name FROM categories WHERE name = $1;", [name])).rows[0];
         if (repeatedName) {
             res.sendStatus(409);
             return;

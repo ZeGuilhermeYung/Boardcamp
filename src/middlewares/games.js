@@ -1,4 +1,4 @@
-import { connection } from "../database/database.js";
+import database from "../database/database.js";
 import { gamesSchema, searchGameSchema } from "../schemas/games.js";
 
 async function gameSearchValidation(req, res, next) {
@@ -36,7 +36,7 @@ async function gameBodyValidation(req, res, next) {
     }
 
     try {
-        const repeatedGame = (await connection.query(
+        const repeatedGame = (await database.query(
             "SELECT * FROM games WHERE name = $1;",
             [name]
         )).rows[0];
@@ -68,7 +68,7 @@ async function gameIdSearchValidation(req, res, next) {
     }
 
     try {
-        const game = (await connection.query("SELECT * FROM games WHERE id = $1;", [gameId])).rows[0];
+        const game = (await database.query("SELECT * FROM games WHERE id = $1;", [gameId])).rows[0];
 
         if (!game) {
             res.status(404).send({ message: "Game not found" });

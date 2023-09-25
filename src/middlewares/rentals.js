@@ -1,4 +1,4 @@
-import { connection } from "../database/database.js";
+import database from "../database/database.js";
 import { rentalSchema } from "../schemas/rentals.js";
 
 async function rentalBodyValidation(req, res, next) {
@@ -28,7 +28,7 @@ async function rentalCustomerValidation(req, res, next) {
     const { customerId } = res.locals.body;
 
     try {
-        const customer = (await connection.query("SELECT * FROM customers WHERE id = $1;", [customerId])).rows[0];
+        const customer = (await database.query("SELECT * FROM customers WHERE id = $1;", [customerId])).rows[0];
 
         if (!customer) {
             res.status(400).send({ message: "Client not found" });
@@ -47,7 +47,7 @@ async function rentalGameValidation(req, res, next) {
     const { gameId } = res.locals.body;
 
     try {
-        const game = (await connection.query("SELECT * FROM games WHERE id = $1;", [gameId])).rows[0];
+        const game = (await database.query("SELECT * FROM games WHERE id = $1;", [gameId])).rows[0];
 
         if (!game) {
             res.status(400).send({ message: "Game not found" });
@@ -66,7 +66,7 @@ async function rentalsPossibilityValidation(req, res, next) {
     const { game } = res.locals;
 
     try {
-        const numberRentals = (await connection.query('SELECT COUNT(*) FROM rentals WHERE "gameId" = $1 AND "returnDate" IS NULL;', [game.id])).rows[0].count;
+        const numberRentals = (await database.query('SELECT COUNT(*) FROM rentals WHERE "gameId" = $1 AND "returnDate" IS NULL;', [game.id])).rows[0].count;
         if (Number(numberRentals) >= game.stockTotal) {
             res.status(400).send({ message: "Game out of stock right now" });
             return;
@@ -83,7 +83,7 @@ async function rentalIdValidation(req, res, next) {
     const { id } = req.params;
 
     try {
-        const rental = (await connection.query("SELECT * FROM rentals WHERE id = $1;", [id])).rows[0];
+        const rental = (await database.query("SELECT * FROM rentals WHERE id = $1;", [id])).rows[0];
 
         if (!rental) {
             res.status(404).send({ message: "Rental not found" });

@@ -13,7 +13,7 @@
     "url": "git+https://github.com/ZeGuilhermeYung/Boardcamp.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Zé Guilherme",
   "license": "ISC",
   "dependencies": {
     "@hapi/joi-date": "^2.0.1",

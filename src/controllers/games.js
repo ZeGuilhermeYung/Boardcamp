@@ -1,8 +1,8 @@
-import { connection } from "../database/database.js";
+import database from "../database/database.js";
 
 async function readGames(req, res) {
     try {
-        const games = (await connection.query(
+        const games = (await database.query(
             "SELECT * FROM games;"
         )).rows;
 
@@ -17,7 +17,7 @@ async function createGame(req, res) {
     const { name, image, stockTotal, pricePerDay } = res.locals.body;
 
     try {
-        await connection.query(
+        await database.query(
             'INSERT INTO games (name, image, "stockTotal", "pricePerDay") VALUES ($1, $2, $3, $4);',
             [name, image, stockTotal, pricePerDay]
         );

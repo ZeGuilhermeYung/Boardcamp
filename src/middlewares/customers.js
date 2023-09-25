@@ -1,4 +1,4 @@
-import { connection } from "../database/database.js";
+import database from "../database/database.js";
 import { customerSchema, searchCustomerSchema } from "../schemas/customers.js";
 
 async function customersSearchValidation(req, res, next) {
@@ -49,7 +49,7 @@ async function uniqueCustomerValidation(req, res, next) {
     const { cpf } = res.locals.body;
 
     try {
-        const repeatedCustomer = (await connection.query("SELECT * FROM customers WHERE cpf = $1;", [cpf])).rows[0];
+        const repeatedCustomer = (await database.query("SELECT * FROM customers WHERE cpf = $1;", [cpf])).rows[0];
         if (repeatedCustomer) {
             res.status(409).send({ message: "Customer already registered" });
             return;
@@ -66,7 +66,7 @@ async function customerIdValidation(req, res, next) {
     const { id } = req.params;
 
     try {
-        const customer = (await connection.query(`SELECT *, to_char(birthday, 'YYYY-MM-DD') AS birthday FROM customers WHERE id = $1`, [id])).rows[0];
+        const customer = (await database.query(`SELECT *, to_char(birthday, 'YYYY-MM-DD') AS birthday FROM customers WHERE id = $1`, [id])).rows[0];
 
         if (!customer) {
             res.status(404).send({ message: "Client not found" });
@@ -86,7 +86,7 @@ async function customerCPFValidation(req, res, next) {
     const { cpf } = res.locals.body;
 
     try {
-        const customerCPF = (await connection.query("SELECT * FROM customers WHERE cpf = $1;", [cpf])).rows[0];
+        const customerCPF = (await database.query("SELECT * FROM customers WHERE cpf = $1;", [cpf])).rows[0];
 
         if (customerCPF && customerCPF.id !== customer.id) {
             res.sendStatus(409);
@@ -108,7 +108,7 @@ async function customerIdSearchValidation(req, res, next) {
     }
 
     try {
-        const customer = (await connection.query("SELECT * FROM customers WHERE id = $1;", [customerId])).rows[0];
+        const customer = (await database.query("SELECT * FROM customers WHERE id = $1;", [customerId])).rows[0];
 
         if (!customer) {
             res.status(404).send({ message: "Client not found" });
