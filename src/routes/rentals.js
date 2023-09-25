@@ -11,4 +11,4 @@ router.get("/rentals", customerIdSearchValidation, gameIdSearchValidation, readR
 router.post("/rentals/:id/return", rentalIdValidation, rentalNotReturnedValidation, updateRental);
 router.delete("/rentals/:id", rentalIdValidation, rentalReturnedValidation, deleteRental);
 
-export default router;
+export default rentalsRouter;

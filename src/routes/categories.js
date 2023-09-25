@@ -7,4 +7,4 @@ const router = express.Router();
 router.get("/categories", readCategories);
 router.post("/categories", nameCategoriesValidation, createCategory);
 
-export default router;
+export default categoriesRouter;

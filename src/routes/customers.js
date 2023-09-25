@@ -9,4 +9,4 @@ router.get("/customers/:id", customerIdValidation, readSingleCustomer);
 router.post("/customers", customerBodyValidation, uniqueCustomerValidation, createCustomer);
 router.put("/customers/:id", customerBodyValidation, customerIdValidation, customerCPFValidation, updateCustomer);
 
-export default router;
+export default customersRouter;

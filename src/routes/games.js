@@ -7,4 +7,4 @@ const router = express.Router();
 router.get("/games", gameSearchValidation, readGames);
 router.post("/games", gameBodyValidation, createGame);
 
-export default router;
+export default gamesRouter;
