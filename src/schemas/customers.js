@@ -1,4 +1,4 @@
-import joi from "joi";
+import joi, { date } from "joi";
 
 const searchCustomerSchema = joi.object({
     cpf: joi.string()
