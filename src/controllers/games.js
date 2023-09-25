@@ -4,7 +4,7 @@ async function readGames(req, res) {
     const { name } = res.locals;
 
     try {
-        if (name === undefined) {
+        if (name) {
             const games = (await connection.query(
                 'SELECT games.*, categories.name AS "categoryName" FROM games JOIN categories ON games;'
             )).rows;
