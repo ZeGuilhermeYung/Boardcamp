@@ -21,12 +21,11 @@ async function gameSearchValidation(req, res, next) {
 }
 
 async function gameBodyValidation(req, res, next) {
-    const { name, image, stockTotal, categoryId, pricePerDay } = req.body;
+    const { name, image, stockTotal, pricePerDay } = req.body;
     const validation = gamesSchema.validate({
         name,
         image,
         stockTotal,
-        categoryId,
         pricePerDay
     }, { abortEarly: false });
 
@@ -47,21 +46,10 @@ async function gameBodyValidation(req, res, next) {
             return;
         }
 
-        const category = (await connection.query(
-            "SELECT * FROM categories WHERE id = $1;",
-            [categoryId]
-        )).rows[0];
-
-        if (!category) {
-            res.sendStatus(400);
-            return;
-        }
-
         res.locals.body = {
             name,
             image,
             stockTotal,
-            categoryId,
             pricePerDay
         };
         next();
