@@ -12,12 +12,12 @@ const customerSchema = joi.object({
         .trim()
         .required(),
     phone: joi.string()
-        .pattern(/[0-9]/)
+        .pattern(/^\d+$/)
         .min(10)
         .max(11)
         .required(),
     cpf: joi.string()
-        .pattern(/[0-9]/)
+        .pattern(/^\d+$/)
         .length(11)
         .required(),
     birthday: joi.date()
