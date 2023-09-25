@@ -23,16 +23,16 @@ async function readRentals(req, res) {
 
     try {
         if (customer && game) {
-            rentals = (await connection.query(`SELECT rentals.*, json_build_object('id', customers.id, 'name', customers.name) AS customer, json_build_object('id', games.id, 'name', games.name) AS game FROM rentals JOIN customers ON rentals."customerId" = customers.id JOIN games ON rentals."gameId" = games.id JOIN categories ON games."gameId" WHERE rentals."customerId" = $1 AND rentals."gameId" = $2;`, [customer.id, game.id])).rows;
+            rentals = (await connection.query(`SELECT rentals.*, json_build_object('id', customers.id, 'name', customers.name) AS customer, json_build_object('id', games.id, 'name', games.name) AS game FROM rentals JOIN customers ON rentals."customerId" = customers.id JOIN games ON rentals."gameId" = games.id JOIN categories ON games. to_char(rentDate, 'YYYY-MM-DD') AS rentDate FROM rentals. "gameId" WHERE rentals."customerId" = $1 AND rentals."gameId" = $2;`, [customer.id, game.id])).rows;
 
         } else if (customer && !game) {
-            rentals = (await connection.query(`SELECT rentals.*, json_build_object('id', customers.id, 'name', customers.name) AS customer, json_build_object('id', games.id, 'name', games.name) AS game FROM rentals JOIN customers ON rentals."customerId" = customers.id JOIN games ON rentals."gameId" = games.id JOIN categories ON games."gameId" WHERE rentals."customerId" = $1;`, [customer.id])).rows;
+            rentals = (await connection.query(`SELECT rentals.*, json_build_object('id', customers.id, 'name', customers.name) AS customer, json_build_object('id', games.id, 'name', games.name) AS game FROM rentals JOIN customers ON rentals."customerId" = customers.id JOIN games ON rentals."gameId" = games.id JOIN categories ON games. to_char(rentDate, 'YYYY-MM-DD') AS rentDate FROM rentals."gameId" WHERE rentals."customerId" = $1;`, [customer.id])).rows;
 
         } else if (!customer && game) {
-            rentals = (await connection.query(`SELECT rentals.*, json_build_object('id', customers.id, 'name', customers.name) AS customer, json_build_object('id', games.id, 'name', games.name) AS game FROM rentals JOIN customers ON rentals."customerId" = customers.id JOIN games ON rentals."gameId" = games.id JOIN categories ON games."gameId" WHERE rentals."gameId" = $1;`, [game.id])).rows;
+            rentals = (await connection.query(`SELECT rentals.*, json_build_object('id', customers.id, 'name', customers.name) AS customer, json_build_object('id', games.id, 'name', games.name) AS game FROM rentals JOIN customers ON rentals."customerId" = customers.id JOIN games ON rentals."gameId" = games.id JOIN categories ON games. to_char(rentDate, 'YYYY-MM-DD') AS rentDate FROM rentals. "gameId" WHERE rentals."gameId" = $1;`, [game.id])).rows;
 
         } else {
-            rentals = (await connection.query(`SELECT rentals.*, json_build_object('id', customers.id, 'name', customers.name) AS customer, json_build_object('id', games.id, 'name', games.name) AS game FROM rentals JOIN customers ON rentals."customerId" = customers.id JOIN games ON rentals."gameId" = games.id JOIN categories ON games."gameId";`)).rows;
+            rentals = (await connection.query(`SELECT rentals.*, json_build_object('id', customers.id, 'name', customers.name) AS customer, json_build_object('id', games.id, 'name', games.name) AS game FROM rentals JOIN customers ON rentals."customerId" = customers.id JOIN games ON rentals."gameId" = games.id JOIN categories ON games. to_char(rentDate, 'YYYY-MM-DD') AS rentDate FROM rentals. "gameId";`)).rows;
         }
 
         rentals.forEach(rent => {
