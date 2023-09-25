@@ -66,16 +66,19 @@ async function customerIdValidation(req, res, next) {
     const { id } = req.params;
 
     try {
-        const customerBirth = await db.query(`SELECT *, to_char(birthday, 'YYYY-MM-DD') AS birthday FROM customers WHERE id = $1`, [id]);
-        if (customerBirth.rowCount === 0) return response.sendStatus(404);
+        const customer = (await connection.query(`SELECT *, to_char(birthday, 'YYYY-MM-DD') AS birthday FROM customers WHERE id = $1`, [id])).rows[0];
 
-        response.send(customerBirth.rows[0]);
+        if (!customer) {
+            res.status(404).send({ message: "Client not found" });
+            return;
+        }
 
+        res.locals.customer = customer;
+        next();
     } catch (error) {
         console.log(error);
         res.sendStatus(500);
     }
-   
 }
 
 async function customerCPFValidation(req, res, next) {
