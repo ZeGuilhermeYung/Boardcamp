@@ -83,7 +83,7 @@ async function customerCPFValidation(req, res, next) {
         const customerCPF = (await connection.query("SELECT * FROM customers WHERE cpf = $1;", [cpf])).rows[0];
 
         if (customerCPF && customerCPF.id !== customer.id) {
-            res.sendStatus(400);
+            res.sendStatus(409);
             return;
         }
 
