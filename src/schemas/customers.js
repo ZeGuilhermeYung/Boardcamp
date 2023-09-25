@@ -1,4 +1,7 @@
 import joi from "joi";
+import joidate from '@joi/date';
+
+joi.extend(joidate);
 
 const searchCustomerSchema = joi.object({
     cpf: joi.string()
@@ -20,10 +23,8 @@ const customerSchema = joi.object({
         .pattern(/^\d+$/)
         .length(11)
         .required(),
-    birthday: joi.string()
-        .pattern(/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
-        .max(10)
-        .required()
+    birthday: joi.date()
+        .format('YYYY-MM-DD')
 });
 
 export {
